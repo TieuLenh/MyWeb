@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+.login-card{
+    @apply bg-white p-8 rounded-lg shadow-md w-80 flex flex-col gap-4;
+
+    & input{
+        @apply border border-gray-300 rounded px-3 py-2 outline-none;
+
+        &:focus{
+            @apply border-blue-500 ring-1 ring-blue-300;
+        }
+    }
+}
+
+.login-title{
+    @apply text-xl font-semibold text-center;
+}
+
+.username{
+}
+
+.password{
+}
+
+.login-button{
+    @apply bg-blue-500 text-white py-2 rounded cursor-pointer;
+
+    &:hover{
+        @apply bg-blue-600;
+    }
+}
+@import "tailwindcss";
+
+.title{
+    @apply text-blue-500 text-4xl font-bold;
+}
