@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.javaWeb.Repositories.UserRepository;
 import com.javaWeb.dto.AuthRequest;
+import com.javaWeb.dto.AuthRespone;
 import com.javaWeb.Models.User;
 
 
@@ -28,16 +29,8 @@ public class UserService {
         return repo.save(user);
     }
 
-    public List<User> getAllPublicInfor(){
-        return repo.getAllPublicUsers().stream()
-                .map(authRespone -> {
-                    User user = new User();
-                    user.setId(authRespone.getId());
-                    user.setUsername(authRespone.getUsername());
-                    user.setRole(authRespone.getRole());
-                    return user;
-                })
-                .toList();
+    public List<AuthRespone> getAllPublicInfor(){
+        return repo.getAllPublicUsers();
     }
 
     @Autowired

@@ -13,6 +13,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     @Query("SELECT new com.javaWeb.dto.AuthRespone(u.id, u.username, u.role) FROM User u")
     List<AuthRespone> getAllPublicUsers();
-
-    
 }

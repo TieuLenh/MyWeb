@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.javaWeb.Models.User;
 import com.javaWeb.Services.UserService;
+import com.javaWeb.dto.AuthRespone;
 
 @RestController
 @RequestMapping("/users")
@@ -16,9 +17,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers(){
-        System.out.println(System.getenv("DB_PASSWORD"));
-        return service.getAllUsers();
+    public List<AuthRespone> getUsers(){
+        return service.getAllPublicInfor();
     }
 
     @PostMapping

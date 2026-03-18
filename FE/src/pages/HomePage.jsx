@@ -1,28 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { isLoggedIn, getUser } from "../utils/auth"
+import Account from "../Elements/Account"
+
 function HomePage() {
-    const [isLoggedin, setIsLoggedin] = useState(false)
-    // try {
-    //     const token = localStorage.getItem("token")
-    //     const user = JSON.parse(localStorage.getItem("user"))
-    //     if (token) {
-    //         setIsLoggedin(true)
-    //         console.log("User info:", user)
-    //     } else {
-    //         setIsLoggedin(false)
-    //     }  
-    // } catch (err) {
-    //     console.error("Error checking login status:", err)
-    //     setIsLoggedin(false)
-    // }
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        if (isLoggedIn()) setUser(getUser())
+        return () => setUser(null) 
+    }, [])
+
     return (
-        <>
-            <h1>Home</h1>
-            {isLoggedin}
-            <button onClick={() => window.location.href = "/auth"}>Logout</button>
-        </>
-
+        <div>
+            <h1>Home Page</h1>
+            <Account userInfor={user} />
+        </div>
     )
-
 }
 
 export default HomePage
