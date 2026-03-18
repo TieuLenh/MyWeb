@@ -1,11 +1,12 @@
 package com.javaWeb.Services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.javaWeb.Repositories.UserRepository;
-import com.javaWeb.dto.RegisterRequest;
+import com.javaWeb.dto.AuthRequest;
 import com.javaWeb.Models.User;
 
 
@@ -27,18 +28,30 @@ public class UserService {
         return repo.save(user);
     }
 
-    public User login(String username, String password) {
-        User user = repo.findByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
-        }
-        return null;
+    public List<User> getAllPublicInfor(){
+        return repo.getAllPublicUsers().stream()
+                .map(authRespone -> {
+                    User user = new User();
+                    user.setId(authRespone.getId());
+                    user.setUsername(authRespone.getUsername());
+                    user.setRole(authRespone.getRole());
+                    return user;
+                })
+                .toList();
     }
 
     @Autowired
     private PasswordEncoder pe;
 
-    public void register(RegisterRequest request){
+    public User login(AuthRequest request){ 
+        User user = repo.findByUsername(request.getUsername());
+        if (user != null && pe.matches(request.getPassword(), user.getPassword())) {
+            return user;
+        }
+        return null;
+    }
+
+    public void register(AuthRequest request){
 
         if(repo.existsByUsernameAndPassword(
                 request.getUsername(),
@@ -55,4 +68,9 @@ public class UserService {
         repo.save(user);
     }
 
+    public void coercionSetPassword(User user, String newPassword){
+        String encodedPassword = pe.encode(newPassword);
+        user.setPassword(encodedPassword);
+        repo.save(user);
+    }
 }

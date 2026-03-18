@@ -4,8 +4,9 @@ package com.javaWeb.Controllers;
 import org.springframework.web.bind.annotation.*;
 import com.javaWeb.Models.User;
 import com.javaWeb.Services.UserService;
-import com.javaWeb.dto.LoginRequest;
-import com.javaWeb.dto.RegisterRequest;
+import com.javaWeb.dto.AuthRequest;
+import com.javaWeb.dto.AuthRespone;
+
 
 @RestController
 public class AuthController {
@@ -17,22 +18,15 @@ public class AuthController {
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody LoginRequest request) {
-
-        User user = userService.login(
-            request.getUsername(),
-            request.getPassword()
-        );
-
-        return user;
+    public AuthRespone login(@RequestBody AuthRequest request) {
+        User user = userService.login(request);
+        return new AuthRespone(user.getId(), user.getUsername(), user.getRole());
     }
 
 
     @PostMapping("/api/register")
-    public String register(@RequestBody RegisterRequest request){
-
+    public String register(@RequestBody AuthRequest request){
         userService.register(request);
-
         return "Register success";
     }
 

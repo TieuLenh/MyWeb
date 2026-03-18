@@ -17,6 +17,7 @@ public class UserController {
 
     @GetMapping
     public List<User> getUsers(){
+        System.out.println(System.getenv("DB_PASSWORD"));
         return service.getAllUsers();
     }
 

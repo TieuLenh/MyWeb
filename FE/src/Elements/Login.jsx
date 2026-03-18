@@ -5,8 +5,8 @@ function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const login = async () => {
-
+    const login = async (e) => {
+        e.preventDefault()
         try {
 
             const res = await fetch("/api/login", {
@@ -21,53 +21,54 @@ function Login() {
             })
 
             const data = await res.json()
-
             // Nếu backend trả lỗi
             if (!res.ok || !data) {
                 alert(data?.message || "Login failed")
                 return
             }
+            // login thành công, backend trả token
+            // 1. Lưu token
+            localStorage.setItem("token", data.token)
 
-            // Login thành công
-            if (data.role === "ADMIN") {
-                window.location.href = "/admin"
-            } else {
-                window.location.href = "/user"
-            }
+            // 2. Lưu thông tin user
+            localStorage.setItem("user", JSON.stringify(data.user))
 
+            // 3. Chuyển hướng
+            window.location.href = "/"
         } catch (err) {
             console.error(err)
-            alert("Cannot connect to server")
+            alert("error when login")
         }
     }
 
     return (
 
-        <div>
+        <form onSubmit={login} className="authForm" >
 
-            <h1>Login</h1>
+            <h1 className='text-red-500 text-3xl'>Login</h1>
 
             <input
+                id="1"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="Username"
+                className="authCell"
             />
 
             <input
+                id="2"
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Password"
+                className="authCell"
             />
 
-            <button onClick={login}>
+            <button onClick={login} className="confirmBtn">
                 Login
             </button>
-            <h1 className="text-red-500 text-3xl">
-                Test Tailwind
-            </h1>
-            <button onClick={() => window.location.href = "/register"}>Register</button>
-        </div>
+            
+        </form>
 
     )
 }
