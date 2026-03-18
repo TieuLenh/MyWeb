@@ -15,7 +15,7 @@ function Register() {
                 return
             }
 
-            const res = await fetch("/api/register", {
+            const res = await fetch(`${API_BASE}/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
