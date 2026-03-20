@@ -1,12 +1,16 @@
+// src/Elements/Login.jsx
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { saveAuth } from "../utils/auth"
 
 function Login() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-
+    const navigate = useNavigate()
     const login = async (e) => {
         e.preventDefault()
+        
         try {
 
             const res = await fetch("/api/login", {
@@ -26,18 +30,11 @@ function Login() {
                 alert(data?.message || "Login failed")
                 return
             }
-            // login thành công, backend trả token
-            // 1. Lưu token
-            localStorage.setItem("token", data.token)
-
-            // 2. Lưu thông tin user
-            localStorage.setItem("user", JSON.stringify(data.user))
-
-            // 3. Chuyển hướng
-            window.location.href = "/"
+            saveAuth(data.token, data)
+            navigate("/")
         } catch (err) {
             console.error(err)
-            alert("error when login")
+            alert("error: " + err.message)
         }
     }
 

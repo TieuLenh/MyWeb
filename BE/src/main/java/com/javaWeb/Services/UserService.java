@@ -51,21 +51,18 @@ public class UserService {
         return null;
     }
 
-    public void register(AuthRequest request){
-
-        if(repo.existsByUsernameAndPassword(
-                request.getUsername(),
-                request.getPassword()
-        )){
-            throw new RuntimeException("User already exists");
+    public boolean register(AuthRequest request){
+        User user = repo.findByUsername(request.getUsername());
+        if(user != null && pe.matches(request.getPassword(), user.getPassword())){
+            return false;
         }
-
-        User user = new User();
-        user.setUsername(request.getUsername());
+        User newUser = new User();
+        newUser.setUsername(request.getUsername());
         String encodedPassword = pe.encode(request.getPassword());
-        user.setPassword(encodedPassword);
-        user.setRole("USER");
-        repo.save(user);
+        newUser.setPassword(encodedPassword);
+        newUser.setRole("USER");
+        repo.save(newUser);
+        return true;
     }
 
     public void coercionSetPassword(User user, String newPassword){
