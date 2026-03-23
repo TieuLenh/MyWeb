@@ -1,0 +1,65 @@
+.SearchBox {
+    @apply relative;
+}
+
+.SearchBox-form {
+    @apply relative;
+}
+
+.search-input {
+    @apply flex-1 w-[400px] px-4 py-2 border border-transparent rounded-full transition-colors duration-200 pr-12;
+    background-image: linear-gradient(white, white), linear-gradient(90deg, #f00, #00f);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border: 2px solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(90deg, #f00, #00f);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.search-button {
+    @apply absolute right-[2px] top-[5%] h-[90%] bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors duration-200 px-3;
+}
+
+.search-button svg {
+    @apply h-5 w-5;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        display: none;
+        width: auto;
+    }
+
+    .SearchBox.search-active .search-input {
+        display: block;
+        width: calc(100% - 52px);
+    }
+
+    .search-button {
+        right: 0.25rem;
+        top: 0.25rem;
+        height: 2rem;
+        width: 2rem;
+        padding: 0;
+    }
+
+    .search-history-dropdown {
+        @apply absolute mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-xl z-50;
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .search-history-dropdown .history-item {
+        @apply w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100;
+    }
+
+    .search-history-dropdown .history-empty {
+        @apply px-3 py-2 text-sm text-gray-500;
+    }
+}

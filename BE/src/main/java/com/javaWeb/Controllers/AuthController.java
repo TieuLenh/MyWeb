@@ -25,12 +25,12 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public String register(@RequestBody AuthRequest request){
+    public Boolean register(@RequestBody AuthRequest request){
         boolean isRegistered = userService.register(request);
         if (!isRegistered) {
-            return "Register failed";
+            return false;
         }
-        return "Register success";
+        return true;
     }
 
 }     

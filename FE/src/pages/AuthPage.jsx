@@ -3,6 +3,8 @@ import { useState } from "react"
 import Login from "../Elements/Login"
 import Register from "../Elements/Register"
 
+
+
 function AuthPage() {
     const [availableAccount, setAvailableAccount] = useState(true)
     return (

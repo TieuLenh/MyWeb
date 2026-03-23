@@ -1,0 +1,22 @@
+.header-container {
+    @apply flex items-center justify-between px-6 py-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 shadow-lg text-white;
+    min-height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.home-logo {
+    @apply text-red-500 text-xl font-bold cursor-pointer tracking-wider;
+    letter-spacing: 0.08em;
+}
+
+.header-right {
+    @apply flex items-center gap-4;
+}
+
+/* Fallback for old .header class in case some components still use it */
+.header {
+    @apply flex items-center justify-between p-4 bg-gray-800 text-white;
+}
+

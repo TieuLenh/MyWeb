@@ -42,10 +42,10 @@ function Login() {
 
         <form onSubmit={login} className="authForm" >
 
-            <h1 className='text-red-500 text-3xl'>Login</h1>
+            <h1 className='login-title'>Login</h1>
 
             <input
-                id="1"
+                key="1"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="Username"
@@ -53,7 +53,7 @@ function Login() {
             />
 
             <input
-                id="2"
+                key="2"
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -61,7 +61,7 @@ function Login() {
                 className="authCell"
             />
 
-            <button onClick={login} className="confirmBtn">
+            <button type="submit" className="confirmBtn">
                 Login
             </button>
             

@@ -1,0 +1,105 @@
+/* Auth Form Styling */
+
+
+
+.authForm {
+    /* display: flex */
+    @apply flex
+    /* flex-direction: column */
+    flex-col
+    /* gap: 1.5rem */
+    gap-6
+    /* padding: 2rem */
+    p-8
+    /* background: white */
+    bg-white
+    /* border-radius: 0.75rem */
+    rounded-lg
+    /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) */
+    shadow-lg
+    /* max-width: 400px */
+    max-w-sm
+    /* width: 100% */
+    w-full
+    /* border: 1px solid #e5e7eb */
+    border border-gray-200;
+    /* Responsive Design */
+}
+
+@screen sm {
+    .authForm {
+        /* padding: 1.5rem */
+        @apply p-6
+        /* margin: 1rem */
+        m-4
+        /* max-width: none */
+        max-w-none;
+    }
+}
+
+/* Input Fields */
+.authCell {
+    /* padding: 0.75rem 1rem */
+    @apply px-4 py-3
+    /* border: 1px solid #d1d5db */
+    border border-gray-300
+    /* border-radius: 0.5rem */
+    rounded
+    /* font-size: 1rem */
+    text-base
+    /* transition: border-color 0.2s, box-shadow 0.2s */
+    transition-all duration-200
+    /* outline: none */
+    outline-none;
+}
+
+.authCell:focus {
+    /* border-color: #3b82f6 */
+    @apply border-blue-500
+    /* box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) */
+    ring-4 ring-blue-100;
+}
+
+.authCell::placeholder {
+    /* color: #9ca3af */
+    @apply text-gray-400;
+}
+
+/* Confirm Button */
+.confirmBtn {
+    /* padding: 0.75rem 1rem */
+    @apply px-4 py-3
+    /* background-color: #3b82f6 */
+    bg-blue-500
+    /* color: white */
+    text-white
+    /* border: none */
+    border-0
+    /* border-radius: 0.5rem */
+    rounded
+    /* cursor: pointer */
+    cursor-pointer
+    /* font-size: 1rem */
+    text-base
+    /* font-weight: 500 */
+    font-medium
+    /* transition: background-color 0.2s, transform 0.1s */
+    transition-all duration-200;
+}
+
+.confirmBtn:hover {
+    /* background-color: #2563eb */
+    @apply bg-blue-600;
+}
+
+.confirmBtn:active {
+    /* transform: scale(0.98) */
+    @apply scale-95;
+}
+
+.confirmBtn:focus {
+    /* outline: 2px solid #3b82f6 */
+    @apply outline-2 outline-blue-500
+    /* outline-offset: 2px */
+    outline-offset-2;
+}

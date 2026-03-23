@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.javaWeb.Repositories.UserRepository;
 import com.javaWeb.dto.AuthRequest;
+import com.javaWeb.enums.Role;
 import com.javaWeb.Models.User;
 
 
@@ -40,27 +41,33 @@ public class UserService {
                 .toList();
     }
 
+    // Take PasswordEncoder as a dependency to encode and verify passwords
     @Autowired
     private PasswordEncoder pe;
 
+
+    // Login method that checks if the provided username and password match any user in the database
     public User login(AuthRequest request){ 
-        User user = repo.findByUsername(request.getUsername());
+        User user = repo.findByUsername(request.getUsername()); // Retrieve users are matching the provided username
         if (user != null && pe.matches(request.getPassword(), user.getPassword())) {
-            return user;
+            return user; // If a matching user is found, return the user object
         }
-        return null;
+        return null; // if no matching user is found, return null
     }
 
+    // Register method that creates a new user, user can regist with the same username but different password
     public boolean register(AuthRequest request){
+        // check if the username already exists in the database
         User user = repo.findByUsername(request.getUsername());
-        if(user != null && pe.matches(request.getPassword(), user.getPassword())){
-            return false;
+        if (user != null) {
+            return false; // Username already exists
         }
+        // If the username is not already taken, create a new user object and save it to the database
         User newUser = new User();
         newUser.setUsername(request.getUsername());
         String encodedPassword = pe.encode(request.getPassword());
         newUser.setPassword(encodedPassword);
-        newUser.setRole("USER");
+        newUser.setRole(Role.USER);
         repo.save(newUser);
         return true;
     }

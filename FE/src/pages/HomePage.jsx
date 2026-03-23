@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react"
+import Account from "../Elements/Account"
 import { useNavigate } from "react-router-dom"
+
 import { clearAuth, getUser, isLoggedIn } from "../utils/auth"
+
+import Header from "../Elements/Header"
 
 function HomePage() {
     const [user, setUser] = useState(null)
     const [isAuth, setIsAuth] = useState(false)
 
     const navigate = useNavigate()
-
     useEffect(() => {
         const loggedIn = isLoggedIn()
         setIsAuth(loggedIn)
@@ -23,28 +26,13 @@ function HomePage() {
         clearAuth()
         setUser(null)
         setIsAuth(false)
-        navigate("/auth")
+        navigate("/")
     }
-
     return (
         <div>
-            <h1>Home</h1>
-
-            {isAuth ? (
-                <>
-                    <p>Welcome, {getUser()?.name || "User"}!</p>
-                    <button onClick={handleLogout}>
-                        Logout
-                    </button>
-                </>
-            ) : (
-                <button
-                    onClick={() => navigate("/auth")}
-                    className="btn btn-primary"
-                >
-                    Login
-                </button>
-            )}
+            <Header >
+                <Account isAuth={isAuth} user={user} logout={handleLogout}/>
+            </Header>
         </div>
     )
 }

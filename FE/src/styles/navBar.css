@@ -1,0 +1,40 @@
+.Nav-container {
+    @apply flex items-center;
+}
+
+.Nav-list {
+    @apply flex items-center gap-8;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Nav-list li a {
+    @apply text-white text-base font-medium no-underline transition-colors duration-200;
+    padding: 0.3rem 0.15rem;
+    border-bottom: 2px solid transparent;
+}
+
+.Nav-list li a:hover,
+.Nav-list li a:focus,
+.Nav-list li a.active {
+    @apply text-cyan-300;
+    border-bottom-color: #38bdf8;
+}
+
+.Nav-list li a:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .Nav-container {
+        display: none;
+    }
+
+    .Nav-list {
+        @apply gap-4;
+    }
+    .Nav-list li a {
+        @apply text-sm;
+    }
+}

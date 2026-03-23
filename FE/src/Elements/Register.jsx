@@ -26,18 +26,22 @@ function Register() {
                     password,
                 })
             })
-            const text = await res.text()
-
-            alert(text)
-
-            // chuyển về login
-            window.location.href = "/"
+            const status = await res.json()
+            if (status) {
+                // chuyển về login
+                alert("Register successful")
+                window.location.href = "/"
+            }
+            else{
+                alert("Can not register with these information")
+                setUsername("")
+                setPassword("")
+                setConfirmPassword("")
+            }
 
         } catch (err) {
-
             console.error(err)
-            alert("Have an error when register")
-
+            alert("Have an error during register process: " + err.message)
         }
 
     }
@@ -46,10 +50,10 @@ function Register() {
 
         <form onSubmit={register} className="authForm">
 
-            <h1 className='text-red-500 text-3xl'>Register</h1>
+            <h1 className='register-title'>Register</h1>
 
             <input
-                id="1"
+                key="1"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="Username"
@@ -57,7 +61,7 @@ function Register() {
             />
 
             <input
-                id="2"
+                key="2"
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -66,7 +70,7 @@ function Register() {
             />
 
             <input
-                id="3"
+                key="3"
                 type="password"
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
@@ -75,7 +79,7 @@ function Register() {
             />
 
 
-            <button onClick={register} className="confirmBtn">
+            <button type="submit" className="confirmBtn">
                 Register
             </button>
 

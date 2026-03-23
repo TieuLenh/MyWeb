@@ -1,11 +1,12 @@
 package com.javaWeb.dto;
+import com.javaWeb.enums.Role;
 
 public class AuthRespone {
     private long id;
     private String username;
-    private String role;
+    private Role role;
 
-    public AuthRespone(long id, String username, String role) {
+    public AuthRespone(long id, String username, Role role) {
         this.id = id;
         this.username = username;
         this.role = role;
@@ -19,10 +20,10 @@ public class AuthRespone {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
     public long getId() {
